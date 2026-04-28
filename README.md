@@ -1,4 +1,4 @@
-# SkillScout: Beyond the Degree 🧭
+# Veritas AI | Revealing the Merit Behind the Brand
 ### Team Quadrix | Solution Challenge 2026
 
 ## Setup
