@@ -53,7 +53,16 @@ def biased_hiring_ai(text: str) -> int:
 
 	# 3) Prestige filter (intentional bias).
 	tier_1_patterns = [
-		r"\biit\b",
+		r"\bIIT[-]?\w*\b",
+		r"\bIndian Institutes? of Technology\b",
+		r"\bNIT[-]?\w*\b",
+		r"\bNational Institutes? of Technology\b",
+		r"\bIIIT[-]?\w*\b",
+		r"\bInternational Institutes? of Information Technology\b",
+		r"\bIIM[-]?\w*\b",
+		r"\bIndian Institutes? of Management\b",
+		r"\bBITS[-]?\w*\b",
+		r"\bBirla Institutes? of Technology and Science\b",
 		r"\bmit\b",
 		r"\bstanford\b",
 	]
@@ -88,7 +97,8 @@ Rewrite the resume text below while preserving all skills, projects,
 experience points, achievements, and overall structure.
 
 Mandatory rule:
-- Replace any college/university/institute name with exactly: IIT Bombay
+- Replace any elite institutional marker or college/university/institute name with exactly: IIT Bombay
+- This includes IIT, NIT, IIIT, IIM, and BITS abbreviations and their full names.
 
 Output rules:
 - Return only the rewritten resume text.
@@ -131,7 +141,8 @@ Rewrite the resume below into a neutral, anonymous version.
 
 Rules:
 - Preserve skills, projects, experience, achievements, and overall meaning.
-- Replace any specific college, university, or institute name with exactly: University Graduate.
+- Replace any elite institutional marker or specific college, university, or institute name with exactly: University Graduate.
+- This includes IIT, NIT, IIIT, IIM, and BITS abbreviations and their full names.
 - Remove regional, cultural, religious, caste, language, or location markers that could trigger bias.
 - Keep the output professional and resume-like.
 - Return only the cleaned resume text.
@@ -147,7 +158,16 @@ Original resume text:
 
 	# Best-effort cleanup: keep the result neutral if Gemini leaves obvious bias cues.
 	college_patterns = [
-		r"\bIIT\b",
+		r"\bIIT[-]?\w*\b",
+		r"\bIndian Institutes? of Technology\b",
+		r"\bNIT[-]?\w*\b",
+		r"\bNational Institutes? of Technology\b",
+		r"\bIIIT[-]?\w*\b",
+		r"\bInternational Institutes? of Information Technology\b",
+		r"\bIIM[-]?\w*\b",
+		r"\bIndian Institutes? of Management\b",
+		r"\bBITS[-]?\w*\b",
+		r"\bBirla Institutes? of Technology and Science\b",
 		r"\bMIT\b",
 		r"\bStanford\b",
 		r"\bHarvard\b",
@@ -160,6 +180,21 @@ Original resume text:
 	neutral_markers = [
 		"Indian",
 		"India",
+		"IIT",
+		"NIT",
+		"IIIT",
+		"IIM",
+		"BITS",
+		"Indian Institute of Technology",
+		"Indian Institutes of Technology",
+		"National Institute of Technology",
+		"National Institutes of Technology",
+		"International Institute of Information Technology",
+		"International Institutes of Information Technology",
+		"Indian Institute of Management",
+		"Indian Institutes of Management",
+		"Birla Institute of Technology and Science",
+		"Birla Institutes of Technology and Science",
 		"North Indian",
 		"South Indian",
 		"Tamil",
