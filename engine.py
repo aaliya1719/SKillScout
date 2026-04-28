@@ -39,13 +39,15 @@ def biased_hiring_ai(text: str) -> int:
 		"react",
 		"aws",
 		"docker",
-		"fastapi",
 		"machine learning",
+		"ai",
 		"sql",
 		"java",
+		"git",
+		"nosql",
 	]
 	found_skills = sum(1 for skill in skills if skill in normalized)
-	score += found_skills * 5  # Max +40 if all tracked skills appear.
+	score += found_skills * 3  # Skill multiplier changed from 5 to 3.
 
 	# 2) Experience-based scoring (fair component).
 	if any(word in normalized for word in ["intern", "experience", "developed", "built"]):
@@ -67,7 +69,7 @@ def biased_hiring_ai(text: str) -> int:
 		r"\bstanford\b",
 	]
 	if any(re.search(pattern, normalized) for pattern in tier_1_patterns):
-		score += 35
+		score += 25
 
 	return max(0, min(100, score))
 
