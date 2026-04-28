@@ -9,7 +9,11 @@ from engine import (
 
 
 # Page setup: title shown in browser tab and layout width.
-st.set_page_config(page_title="HR Fairness Audit Tool", layout="wide")
+st.set_page_config(page_title="Veritas AI — Bias Audit", page_icon="🕵️‍♀️", layout="wide")
+
+# App header
+st.title("Veritas AI — Bias Audit")
+st.markdown("### *Revealing the Merit Behind the Brand*")
 
 
 # Small CSS block for a clean, professional HR dashboard look.
