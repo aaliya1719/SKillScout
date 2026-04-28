@@ -20,7 +20,7 @@ Anonymize: The system anonymizes any brand names and institutional tiers to remo
 Audit: You get a neutral report focusing strictly on merit and core value.
 
 💻 Tech Stack
-AI Brain: Google Gemini Flash Latest Version (via Google AI Studio)
-Frontend: Streamlit
-Language: Python 
+AI Brain: Google Gemini Flash Latest Version (via Google AI Studio) |
+Frontend: Streamlit |
+Language: Python |
 Cloud: Google Cloud Ecosystem (API) / Streamlit Cloud (Hosting)
