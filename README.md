@@ -13,7 +13,7 @@ Veritas AI is a professional auditing platform designed to eliminate prestige bi
 
 Live Prototype Link: https://veritas-ai-1719.streamlit.app/
 
-How It Works
+How It Works  
 Upload: Input a resume or job description.  
 Analyze: Gemini AI scans the text for "prestige markers" and elitist language.  
 Anonymize: The system anonymizes any brand names and institutional tiers to remove bias.  
