@@ -31,7 +31,7 @@ def biased_hiring_ai(text: str) -> int:
 	This is intentionally unfair and is only for educational diagnostics.
 	"""
 	normalized = (text or "").lower()
-	score = 20  # Base "resume format" score.
+	score = 25  # Base "resume format" score.
 
 	# 1) Skill-based scoring (fair component).
 	skills = [
@@ -55,18 +55,13 @@ def biased_hiring_ai(text: str) -> int:
 
 	# 3) Prestige filter (intentional bias).
 	tier_1_patterns = [
-		r"\bIIT[-]?\w*\b",
-		r"\bIndian Institutes? of Technology\b",
-		r"\bNIT[-]?\w*\b",
-		r"\bNational Institutes? of Technology\b",
-		r"\bIIIT[-]?\w*\b",
-		r"\bInternational Institutes? of Information Technology\b",
-		r"\bIIM[-]?\w*\b",
-		r"\bIndian Institutes? of Management\b",
-		r"\bBITS[-]?\w*\b",
-		r"\bBirla Institutes? of Technology and Science\b",
-		r"\bmit\b",
+		r"\biit\b",
+		r"\bnit\b",
+		r"\biim\b",
+		r"\bbits\b",
+		r"\biiit\b",
 		r"\bstanford\b",
+		r"\bmit\b",
 	]
 	if any(re.search(pattern, normalized) for pattern in tier_1_patterns):
 		score += 25
@@ -95,12 +90,11 @@ def generate_mirror_resume(original_text: str) -> str:
 You are helping with a diagnostic simulation about hiring bias.
 
 Task:
-Rewrite the resume text below while preserving all skills, projects,
-experience points, achievements, and overall structure.
+Rewrite the resume and replace ONLY the college name with the word IIT.
+Do not change any other text.
 
 Mandatory rule:
-- Replace any elite institutional marker or college/university/institute name with exactly: IIT Bombay
-- This includes IIT, NIT, IIIT, IIM, and BITS abbreviations and their full names.
+- Replace only the college name with exactly: IIT.
 
 Output rules:
 - Return only the rewritten resume text.
@@ -143,8 +137,7 @@ Rewrite the resume below into a neutral, anonymous version.
 
 Rules:
 - Preserve skills, projects, experience, achievements, and overall meaning.
-- Replace any elite institutional marker or specific college, university, or institute name with exactly: University Graduate.
-- This includes IIT, NIT, IIIT, IIM, and BITS abbreviations and their full names.
+- Replace college names with "University Graduate".
 - Remove regional, cultural, religious, caste, language, or location markers that could trigger bias.
 - Keep the output professional and resume-like.
 - Return only the cleaned resume text.
@@ -157,71 +150,6 @@ Original resume text:
 	cleaned_text = (response.text or "").strip()
 	if not cleaned_text:
 		raise RuntimeError("Gemini returned an empty response.")
-
-	# Best-effort cleanup: keep the result neutral if Gemini leaves obvious bias cues.
-	college_patterns = [
-		r"\bIIT[-]?\w*\b",
-		r"\bIndian Institutes? of Technology\b",
-		r"\bNIT[-]?\w*\b",
-		r"\bNational Institutes? of Technology\b",
-		r"\bIIIT[-]?\w*\b",
-		r"\bInternational Institutes? of Information Technology\b",
-		r"\bIIM[-]?\w*\b",
-		r"\bIndian Institutes? of Management\b",
-		r"\bBITS[-]?\w*\b",
-		r"\bBirla Institutes? of Technology and Science\b",
-		r"\bMIT\b",
-		r"\bStanford\b",
-		r"\bHarvard\b",
-		r"\bOxford\b",
-		r"\bCambridge\b",
-	]
-	for pattern in college_patterns:
-		cleaned_text = re.sub(pattern, "University Graduate", cleaned_text, flags=re.IGNORECASE)
-
-	neutral_markers = [
-		"Indian",
-		"India",
-		"IIT",
-		"NIT",
-		"IIIT",
-		"IIM",
-		"BITS",
-		"Indian Institute of Technology",
-		"Indian Institutes of Technology",
-		"National Institute of Technology",
-		"National Institutes of Technology",
-		"International Institute of Information Technology",
-		"International Institutes of Information Technology",
-		"Indian Institute of Management",
-		"Indian Institutes of Management",
-		"Birla Institute of Technology and Science",
-		"Birla Institutes of Technology and Science",
-		"North Indian",
-		"South Indian",
-		"Tamil",
-		"Telugu",
-		"Hindi-speaking",
-		"Muslim",
-		"Hindu",
-		"Christian",
-		"Sikh",
-		"Bengali",
-		"Punjabi",
-		"Marathi",
-		"Gujarati",
-		"Delhi",
-		"Mumbai",
-		"Bengaluru",
-		"Chennai",
-		"Hyderabad",
-	]
-	for marker in neutral_markers:
-		cleaned_text = re.sub(rf"\b{re.escape(marker)}\b", "", cleaned_text, flags=re.IGNORECASE)
-
-	# Remove extra spaces and blank lines created by the cleanup step.
-	cleaned_lines = [re.sub(r"\s{2,}", " ", line).strip() for line in cleaned_text.splitlines()]
-	cleaned_text = "\n".join(line for line in cleaned_lines if line)
 
 	return cleaned_text
 
