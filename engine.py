@@ -90,11 +90,11 @@ def generate_mirror_resume(original_text: str) -> str:
 You are helping with a diagnostic simulation about hiring bias.
 
 Task:
-Rewrite the resume and replace ONLY the college name with the word IIT.
+Rewrite the resume and replace ONLY the college name with the word IIT Bombay.
 Do not change any other text.
 
 Mandatory rule:
-- Replace only the college name with exactly: IIT.
+- Replace only the college name with exactly: IIT Bombay.
 
 Output rules:
 - Return only the rewritten resume text.
